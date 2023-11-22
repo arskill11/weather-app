@@ -1,4 +1,4 @@
-const url = 'https://api.weatherapi.com/v1/forecast.json?key=013579cd6ed546089c7200633231911&days=7&q=';
+const url = 'https://api.weatherapi.com/v1/forecast.json?key=013579cd6ed546089c7200633231911&days=8&q=';
 const searchBtn = document.querySelector('.searchBtn');
 const toCelcuisBtn = document.querySelector('.toCelcuisBtn');
 const toFahrenheitBtn = document.querySelector('.toFahrenheitBtn');
@@ -46,7 +46,43 @@ const oneFiveStatus = document.querySelector('.oneFiveStatus');
 const oneEightStatus = document.querySelector('.oneEightStatus');
 const twoOneStatus = document.querySelector('.twoOneStatus');
 
+const dayOneImg = document.querySelector('.imgDayOne');
+const dayTwoImg = document.querySelector('.imgDayTwo');
+const dayThreeImg = document.querySelector('.imgDayThree');
+const dayFourImg = document.querySelector('.imgDayFour');
+const dayFiveImg = document.querySelector('.imgDayFive');
+const daySixImg = document.querySelector('.imgDaySix');
+const daySevenImg = document.querySelector('.imgDaySeven');
+
+const dateOne = document.querySelector('.dateOne');
+const dateTwo = document.querySelector('.dateTwo');
+const dateThree = document.querySelector('.dateThree');
+const dateFour = document.querySelector('.dateFour');
+const dateFive = document.querySelector('.dateFive');
+const dateSix = document.querySelector('.dateSix');
+const dateSeven = document.querySelector('.dateSeven');
+
+const statusDayOne = document.querySelector('.statusDayOne');
+const statusDayTwo = document.querySelector('.statusDayTwo');
+const statusDayThree = document.querySelector('.statusDayThree');
+const statusDayFour = document.querySelector('.statusDayFour');
+const statusDayFive = document.querySelector('.statusDayFive');
+const statusDaySix = document.querySelector('.statusDaySix');
+const statusDaySeven = document.querySelector('.statusDaySeven');
+
+const tempDayOne = document.querySelector('.tempDayOne');
+const tempDayTwo = document.querySelector('.tempDayTwo');
+const tempDayThree = document.querySelector('.tempDayThree');
+const tempDayFour = document.querySelector('.tempDayFour');
+const tempDayFive = document.querySelector('.tempDayFive');
+const tempDaySix = document.querySelector('.tempDaySix');
+const tempDaySeven = document.querySelector('.tempDaySeven');
+
 const feelsLikeTemplate = 'Feels like ';
+const degreeCircle = String.fromCharCode(176);
+const celcuis = ` ${degreeCircle}C`;
+const fahrenheit = ` ${degreeCircle}F`;
+
 
 async function getAPI () {
   const response = await fetch(url + (input.value || 'minsk'), {mode: 'cors'});
@@ -56,6 +92,12 @@ async function getAPI () {
 }
 
 function getData (data) {
+  showCurrentWeather(data);
+  showHourlyWeather(data);
+  showWeeklyWeather(data);
+}
+
+function showCurrentWeather (data) {
   location.textContent = data.location.country + ', ' + data.location.name;
   localTime.textContent = data.location.localtime;
   humidity.textContent = data.current.humidity;
@@ -68,36 +110,20 @@ function getData (data) {
   sunset.textContent = data.forecast.forecastday[0].astro.sunset;
 
   if (toCelcuisBtn.classList.contains('active')){
-    degrees.textContent = data.current.temp_c + ' ' + String.fromCharCode(176) + 'C';
+    degrees.textContent = data.current.temp_c + celcuis;
     wind.textContent = data.current.wind_kph + ' kph';
     visibility.textContent = data.current.vis_km + ' km';
-    feelsLike.textContent = feelsLikeTemplate + data.current.feelslike_c + ' ' + String.fromCharCode(176) + 'C';
-
-    zeroZero.textContent = data.forecast.forecastday[0].hour[0].temp_c + ' ' + String.fromCharCode(176) + 'C';
-    zeroThree.textContent = data.forecast.forecastday[0].hour[3].temp_c + ' ' + String.fromCharCode(176) + 'C';
-    zeroSix.textContent = data.forecast.forecastday[0].hour[6].temp_c + ' ' + String.fromCharCode(176) + 'C';
-    zeroNine.textContent = data.forecast.forecastday[0].hour[9].temp_c + ' ' + String.fromCharCode(176) + 'C';
-    oneTwo.textContent = data.forecast.forecastday[0].hour[12].temp_c + ' ' + String.fromCharCode(176) + 'C';
-    oneFive.textContent = data.forecast.forecastday[0].hour[15].temp_c + ' ' + String.fromCharCode(176) + 'C';
-    oneEight.textContent = data.forecast.forecastday[0].hour[18].temp_c + ' ' + String.fromCharCode(176) + 'C';
-    twoOne.textContent = data.forecast.forecastday[0].hour[21].temp_c + ' ' + String.fromCharCode(176) + 'C';
+    feelsLike.textContent = feelsLikeTemplate + data.current.feelslike_c + celcuis;
   }
   else if (toFahrenheitBtn.classList.contains('active')) {
-    degrees.textContent = data.current.temp_f + ' ' + String.fromCharCode(176) + 'F';
+    degrees.textContent = data.current.temp_f + fahrenheit;
     wind.textContent = data.current.wind_mph + ' mph';
     visibility.textContent = data.current.vis_miles + ' miles';
-    feelsLike.textContent = feelsLikeTemplate + data.current.feelslike_f + ' ' + String.fromCharCode(176) + 'F';
-
-    zeroZero.textContent = data.forecast.forecastday[0].hour[0].temp_f + ' ' + String.fromCharCode(176) + 'F';
-    zeroThree.textContent = data.forecast.forecastday[0].hour[3].temp_f + ' ' + String.fromCharCode(176) + 'F';
-    zeroSix.textContent = data.forecast.forecastday[0].hour[6].temp_f + ' ' + String.fromCharCode(176) + 'F';
-    zeroNine.textContent = data.forecast.forecastday[0].hour[9].temp_f + ' ' + String.fromCharCode(176) + 'F';
-    oneTwo.textContent = data.forecast.forecastday[0].hour[12].temp_f + ' ' + String.fromCharCode(176) + 'F';
-    oneFive.textContent = data.forecast.forecastday[0].hour[15].temp_f + ' ' + String.fromCharCode(176) + 'F';
-    oneEight.textContent = data.forecast.forecastday[0].hour[18].temp_f + ' ' + String.fromCharCode(176) + 'F';
-    twoOne.textContent = data.forecast.forecastday[0].hour[21].temp_f + ' ' + String.fromCharCode(176) + 'F';
+    feelsLike.textContent = feelsLikeTemplate + data.current.feelslike_f + fahrenheit;
   }
+}
 
+function showHourlyWeather (data) {
   zeroZeroStatus.textContent = data.forecast.forecastday[0].hour[0].condition.text;
   zeroThreeStatus.textContent = data.forecast.forecastday[0].hour[3].condition.text;
   zeroSixStatus.textContent = data.forecast.forecastday[0].hour[6].condition.text;
@@ -116,7 +142,74 @@ function getData (data) {
   oneEightImg.src = data.forecast.forecastday[0].hour[18].condition.icon;
   twoOneImg.src = data.forecast.forecastday[0].hour[21].condition.icon;
 
+  if (toCelcuisBtn.classList.contains('active')){
+    zeroZero.textContent = data.forecast.forecastday[0].hour[0].temp_c + celcuis;
+    zeroThree.textContent = data.forecast.forecastday[0].hour[3].temp_c + celcuis;
+    zeroSix.textContent = data.forecast.forecastday[0].hour[6].temp_c + celcuis;
+    zeroNine.textContent = data.forecast.forecastday[0].hour[9].temp_c + celcuis;
+    oneTwo.textContent = data.forecast.forecastday[0].hour[12].temp_c + celcuis;
+    oneFive.textContent = data.forecast.forecastday[0].hour[15].temp_c + celcuis;
+    oneEight.textContent = data.forecast.forecastday[0].hour[18].temp_c + celcuis;
+    twoOne.textContent = data.forecast.forecastday[0].hour[21].temp_c + celcuis;
+  }
+  else if (toFahrenheitBtn.classList.contains('active')) {
+    zeroZero.textContent = data.forecast.forecastday[0].hour[0].temp_f + fahrenheit;
+    zeroThree.textContent = data.forecast.forecastday[0].hour[3].temp_f + fahrenheit;
+    zeroSix.textContent = data.forecast.forecastday[0].hour[6].temp_f + fahrenheit;
+    zeroNine.textContent = data.forecast.forecastday[0].hour[9].temp_f + fahrenheit;
+    oneTwo.textContent = data.forecast.forecastday[0].hour[12].temp_f + fahrenheit;
+    oneFive.textContent = data.forecast.forecastday[0].hour[15].temp_f + fahrenheit;
+    oneEight.textContent = data.forecast.forecastday[0].hour[18].temp_f + fahrenheit;
+    twoOne.textContent = data.forecast.forecastday[0].hour[21].temp_f + fahrenheit;
+  }
 }
+
+function showWeeklyWeather(data) {
+  dayOneImg.src = data.forecast.forecastday[1].day.condition.icon;
+  dayTwoImg.src = data.forecast.forecastday[2].day.condition.icon;
+  dayThreeImg.src = data.forecast.forecastday[3].day.condition.icon;
+  dayFourImg.src = data.forecast.forecastday[4].day.condition.icon;
+  dayFiveImg.src = data.forecast.forecastday[5].day.condition.icon;
+  daySixImg.src = data.forecast.forecastday[6].day.condition.icon;
+  daySevenImg.src = data.forecast.forecastday[7].day.condition.icon;
+
+  dateOne.textContent = data.forecast.forecastday[1].date;
+  dateTwo.textContent = data.forecast.forecastday[2].date;
+  dateThree.textContent = data.forecast.forecastday[3].date;
+  dateFour.textContent = data.forecast.forecastday[4].date;
+  dateFive.textContent = data.forecast.forecastday[5].date;
+  dateSix.textContent = data.forecast.forecastday[6].date;
+  dateSeven.textContent = data.forecast.forecastday[7].date;
+
+  statusDayOne.textContent = data.forecast.forecastday[1].day.condition.text;
+  statusDayTwo.textContent = data.forecast.forecastday[2].day.condition.text;
+  statusDayThree.textContent = data.forecast.forecastday[3].day.condition.text;
+  statusDayFour.textContent = data.forecast.forecastday[4].day.condition.text;
+  statusDayFive.textContent = data.forecast.forecastday[5].day.condition.text;
+  statusDaySix.textContent = data.forecast.forecastday[6].day.condition.text;
+  statusDaySeven.textContent = data.forecast.forecastday[7].day.condition.text;
+
+  if (toCelcuisBtn.classList.contains('active')){
+    tempDayOne.textContent = data.forecast.forecastday[1].day.maxtemp_c + `${degreeCircle} / ` + data.forecast.forecastday[1].day.mintemp_c + celcuis;
+    tempDayTwo.textContent = data.forecast.forecastday[2].day.maxtemp_c + `${degreeCircle} / ` + data.forecast.forecastday[2].day.mintemp_c + celcuis;
+    tempDayThree.textContent = data.forecast.forecastday[3].day.maxtemp_c + `${degreeCircle} / ` + data.forecast.forecastday[3].day.mintemp_c + celcuis;
+    tempDayFour.textContent = data.forecast.forecastday[4].day.maxtemp_c + `${degreeCircle} / ` + data.forecast.forecastday[4].day.mintemp_c + celcuis;
+    tempDayFive.textContent = data.forecast.forecastday[5].day.maxtemp_c + `${degreeCircle} / ` + data.forecast.forecastday[5].day.mintemp_c + celcuis;
+    tempDaySix.textContent = data.forecast.forecastday[6].day.maxtemp_c + `${degreeCircle} / ` + data.forecast.forecastday[6].day.mintemp_c + celcuis;
+    tempDaySeven.textContent = data.forecast.forecastday[7].day.maxtemp_c + `${degreeCircle} / ` + data.forecast.forecastday[7].day.mintemp_c + celcuis;
+  }
+  else if (toFahrenheitBtn.classList.contains('active')) {
+    tempDayOne.textContent = data.forecast.forecastday[1].day.maxtemp_f + `${degreeCircle} / ` + data.forecast.forecastday[1].day.mintemp_f + fahrenheit;
+    tempDayTwo.textContent = data.forecast.forecastday[2].day.maxtemp_f + `${degreeCircle} / ` + data.forecast.forecastday[2].day.mintemp_f + fahrenheit;
+    tempDayThree.textContent = data.forecast.forecastday[3].day.maxtemp_f + `${degreeCircle} / ` + data.forecast.forecastday[3].day.mintemp_f + fahrenheit;
+    tempDayFour.textContent = data.forecast.forecastday[4].day.maxtemp_f + `${degreeCircle} / ` + data.forecast.forecastday[4].day.mintemp_f + fahrenheit;
+    tempDayFive.textContent = data.forecast.forecastday[5].day.maxtemp_f + `${degreeCircle} / ` + data.forecast.forecastday[5].day.mintemp_f + fahrenheit;
+    tempDaySix.textContent = data.forecast.forecastday[6].day.maxtemp_f + `${degreeCircle} / ` + data.forecast.forecastday[6].day.mintemp_f + fahrenheit;
+    tempDaySeven.textContent = data.forecast.forecastday[7].day.maxtemp_f + `${degreeCircle} / ` + data.forecast.forecastday[7].day.mintemp_f + fahrenheit;
+
+  }
+};
+
 
 getAPI();
 searchBtn.addEventListener('click', getAPI);
