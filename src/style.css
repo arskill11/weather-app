@@ -1,0 +1,273 @@
+body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 0.5fr 7fr 0.5fr;
+    /*background-image: linear-gradient(to top, rgb(58, 201, 201), rgb(88, 88, 210));*/
+    background-image: linear-gradient(to top, rgb(58, 201, 201), rgb(128, 128, 248));
+    row-gap: 50px;
+}
+
+h1, h2, h3 {
+    padding: 0;
+    margin: 0;
+}
+
+/*Navbar*/
+.navbar {
+    grid-row: 1 / 2;
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+}
+
+.searchDiv {
+    padding: 0;
+    height: min-content;
+    border-radius: 15px;
+    display: flex;
+    align-self: center;
+}
+
+.searchBar {
+    height: 2.3rem;
+    width: 70%;
+    border-radius: 15px 0px 0px 15px;
+    flex: 1;
+    font-size: 1.3rem;
+    padding-left: 10px;
+    background-color: rgb(87, 225, 225);
+    border: none;
+}
+
+.searchBtn {
+    width: 10%;
+    border-radius: 0px 15px 15px 0px;
+    height: 2.4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(87, 225, 225);
+    border: none;
+}
+
+.magnify {
+    width: 2rem;
+}
+
+.logo {
+    width: 100px;
+}
+
+.degreeToggleBtns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.toCelcuisBtn,
+.toFahrenheitBtn {
+    background-color: rgb(59, 116, 116);
+    color: white;
+    font-size: 1.3rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgb(4, 50, 50);
+
+}
+
+.toCelcuisBtn.active,
+.toFahrenheitBtn.active {
+    background-color: rgb(91, 189, 189);
+    border: 3px solid rgb(0, 0, 0);
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+}
+
+/*Main Content*/
+
+.mainContent {
+    grid-row: 2 / 3;  
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.location {
+    font-size: 3.5rem;
+}
+
+.localTime {
+    font-size: 2rem;
+    opacity: 0.6;
+}
+
+.details {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(100px, 200px));
+    grid-template-rows: repeat(3, 150px);
+    grid-template-areas:
+    "temperatureDiv temperatureDiv windDiv humidityDiv uvIndexDiv"
+    "temperatureDiv temperatureDiv visibilityDiv cloudinessDiv rainChanceDiv"
+    "temperatureDiv temperatureDiv sunsetRiseDiv sunsetRiseDiv sunsetRiseDiv";
+}
+
+.temperatureDiv{
+    grid-area: temperatureDiv;
+}
+.windDiv {
+    grid-area: windDiv;
+}
+.humidityDiv {
+    grid-area: humidityDiv;
+}
+.uvIndexDiv {
+    grid-area: uvIndexDiv;
+}
+.visibilityDiv {
+    grid-area: visibilityDiv;
+}
+.cloudinessDiv {
+    grid-area: cloudinessDiv;
+}
+.rainChanceDiv {
+    grid-area: rainChanceDiv;
+}
+.sunsetRiseDiv {
+    grid-area: sunsetRiseDiv;
+    display: flex;
+    justify-content: space-around;
+}
+
+.detailDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.temperatureDiv {
+    padding-top: 3rem;
+    justify-self: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    grid-template-rows: min-content 0.5fr 0.2fr;
+}
+
+.tempAndCloud {
+    width: 100%;
+    height: min-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detailValue.degrees {
+    flex: 1;
+    font-size: 5rem ;
+}
+
+.detailName {
+    font-size: 1.8rem;
+    opacity: 0.6;
+    font-weight: bold;
+    margin: 0;
+}
+
+.detailValue {
+    flex: 1;
+    font-size: 2.7rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+.cloud {
+    width: 30%;
+}
+
+.tempStatus {
+    font-size: 2.3rem;
+    text-align: center;
+    align-self: flex-start;
+    font-weight: bold;
+}
+
+.feelsLike {
+    font-size: 1.7rem;
+    opacity: 0.8;
+    align-self: flex-start;
+    font-weight: bold;
+}
+
+/* Hourly forecast*/
+.hours {
+    margin-top: 3rem;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.hourDiv {
+    display: flex;
+    align-items: center;
+    height: min-content;
+}
+
+.hour {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.hourValue {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.hourName {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.hourStatus {
+    font-size: 1.5rem;
+    font-style: italic;
+}
+
+.weekForecast {
+    margin-top: 6rem;
+}
+
+.weekForecastHeading {
+    font-size: 3rem;
+}
+
+/*Footer*/
+
+.footer {
+    grid-row: 3 / 4;
+    height: 100%;
+}
+
+p {
+    margin: 0;
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wether App</title>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="name">
+      <img alt="" class="logo">
+      <h1>Weather</h1>
+    </div>
+    <div class="searchDiv">
+      <input type="text" class="searchBar">
+      <button class="searchBtn"><img class="magnify"></button>
+    </div>
+    <div class="degreeToggleBtns">
+      <button class="toCelcuisBtn active">&deg;C, km/h</button>
+      <button class="toFahrenheitBtn">&deg;F, m/h</button>
+    </div>
+  </nav>
+
+  <main class="mainContent">
+    <h1 class="location"></h1>
+    <h3 class="localTime"></h3>
+    <div class="details">
+      <div class="temperatureDiv">
+        <div class="tempAndCloud">
+          <img class="cloud">
+          <p class="detailValue degrees"></p>
+        </div>
+        <p class="tempStatus"></p>
+        <p class="feelsLike"></p>
+      </div>
+      <div class="detailDiv windDiv">
+        <p class="detailName">Wind</p>
+        <p class="detailValue wind"></p>
+      </div>
+      <div class="detailDiv humidityDiv">
+        <p class="detailName">Humidity</p>
+        <p class="detailValue humidity"></p>
+      </div>
+      <div class="detailDiv uvIndexDiv">
+        <p class="detailName">UV index</p>
+        <p class="detailValue uvIndex"></p>
+      </div>
+      <div class="detailDiv visibilityDiv">
+        <p class="detailName">Visibility</p>
+        <p class="detailValue visibility"></p>
+      </div>
+      <div class="detailDiv cloudinessDiv">
+        <p class="detailName">cloudiness</p>
+        <p class="detailValue cloudiness"></p>
+      </div>
+      <div class="detailDiv rainChanceDiv">
+        <p class="detailName">Chance of rain</p>
+        <p class="detailValue rainChance"></p>
+      </div>
+      <div class="sunsetRiseDiv">
+        <div class="detailDiv sunriseDiv">
+          <p class="detailName">Sunrise</p>
+          <p class="detailValue sunrise"></p>
+        </div>
+        <div class="detailDiv sunsetDiv">
+          <p class="detailName">Sunset</p>
+          <p class="detailValue sunset"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hours">
+      <div class="hour">
+        <div class="hourDiv">
+          <img class="zeroZeroImg">
+          <p class="hourValue zero-zero"></p>
+        </div>
+        <p class="hourStatus zeroZeroStatus"></p>
+        <p class="hourName">00:00</p>
+      </div>
+      <div class="hour">
+        <div class="hourDiv">
+          <img class="zeroThreeImg">
+          <p class="hourValue zero-three"></p>
+        </div>
+        <p class="hourStatus zeroThreeStatus"></p>
+        <p class="hourName">03:00</p>
+      </div>
+      <div class="hour">
+        <div class="hourDiv">
+          <img class="zeroSixImg">
+          <p class="hourValue zero-six"></p>
+        </div>
+        <p class="hourStatus zeroSixStatus"></p>
+        <p class="hourName">06:00</p>
+      </div>
+      <div class="hour">
+        <div class="hourDiv">
+          <img class="zeroNineImg">
+          <p class="hourValue zero-nine"></p>
+        </div>
+        <p class="hourStatus zeroNineStatus"></p>
+        <p class="hourName">09:00</p>
+      </div>
+      <div class="hour">
+        <div class="hourDiv">
+          <img class="oneTwoImg">
+          <p class="hourValue one-two"></p>
+        </div>
+        <p class="hourStatus oneTwoStatus"></p>
+        <p class="hourName">12:00</p>
+      </div>
+      <div class="hour">
+        <div class="hourDiv">
+          <img class="oneFiveImg">
+          <p class="hourValue one-five"></p>
+        </div>
+        <p class="hourStatus oneFiveStatus"></p>
+        <p class="hourName">15:00</p>
+      </div>
+      <div class="hour">
+        <div class="hourDiv">
+          <img class="oneEightImg">
+          <p class="hourValue one-eight"></p>
+        </div>
+        <p class="hourStatus oneEightStatus"></p>
+        <p class="hourName">18:00</p>
+      </div>
+      <div class="hour">
+        <div class="hourDiv">
+          <img class="twoOneImg">
+          <p class="hourValue two-one"></p>
+        </div>
+        <p class="hourStatus twoOneStatus"></p>
+        <p class="hourName">21:00</p>
+      </div>
+    </div>
+
+    <div class="weekForecast">
+      <h2 class="weekForecastHeading">Weekly forecast</h2>
+      <div class="table">
+      </div>
+    </div>
+    
+  </main>
+
+  <footer class="footer">Developed by 17thspring</footer>
+</body>
+</html>
