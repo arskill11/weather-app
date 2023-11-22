@@ -113,6 +113,7 @@ h1, h2, h3 {
 
 .location {
     font-size: 3.5rem;
+    text-shadow: black 0px 2px;
 }
 
 .localTime {
@@ -123,7 +124,7 @@ h1, h2, h3 {
 .details {
     margin-top: 4rem;
     display: grid;
-    grid-template-columns: minmax(150px, 250px) repeat(4, minmax(100px, 200px));
+    grid-template-columns: minmax(150px, 250px) repeat(4, minmax(100px, 250px));
     grid-template-rows: repeat(3, 150px);
     grid-template-areas:
     "temperatureDiv temperatureDiv windDiv humidityDiv uvIndexDiv"
@@ -226,7 +227,7 @@ h1, h2, h3 {
 /* Hourly forecast*/
 .hours {
     margin-top: 3rem;
-    width: 80%;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
 }
@@ -291,7 +292,7 @@ h1, h2, h3 {
 }
 
 .imgDay {
-    width: 50%;
+    width: 30%;
     justify-self: right;
 }
 
@@ -321,4 +322,18 @@ h1, h2, h3 {
 p, h1, h2, h3, h4 {
     margin: 0;
     padding: 0;
+}
+
+.errorDialog{
+    width: 40%;
+    text-align: center;
+}
+
+.errorHeading {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.errorDescription {
+    font-size: 2rem;
 }

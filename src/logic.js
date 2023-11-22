@@ -1,4 +1,14 @@
 const url = 'https://api.weatherapi.com/v1/forecast.json?key=013579cd6ed546089c7200633231911&days=8&q=';
+const feelsLikeTemplate = 'Feels like ';
+const degreeCircle = String.fromCharCode(176);
+const celcuis = ` ${degreeCircle}C`;
+const fahrenheit = ` ${degreeCircle}F`;
+const http = 'http:'
+
+const errorDialog = document.querySelector('.errorDialog');
+const errorDialogCloseBtn = document.querySelector('.closeDialog');
+const errorDescription = document.querySelector('.errorDescription');
+
 const searchBtn = document.querySelector('.searchBtn');
 const toCelcuisBtn = document.querySelector('.toCelcuisBtn');
 const toFahrenheitBtn = document.querySelector('.toFahrenheitBtn');
@@ -78,17 +88,25 @@ const tempDayFive = document.querySelector('.tempDayFive');
 const tempDaySix = document.querySelector('.tempDaySix');
 const tempDaySeven = document.querySelector('.tempDaySeven');
 
-const feelsLikeTemplate = 'Feels like ';
-const degreeCircle = String.fromCharCode(176);
-const celcuis = ` ${degreeCircle}C`;
-const fahrenheit = ` ${degreeCircle}F`;
-
 
 async function getAPI () {
-  const response = await fetch(url + (input.value || 'minsk'), {mode: 'cors'});
-  const data = await response.json();
-  console.log(data);
-  getData(data);
+  try {
+    const response = await fetch(url + (input.value || 'minsk'), {mode: 'cors'});
+    const data = await response.json();
+    console.log(data);
+    getData(data);
+  }
+  catch (err){
+    console.log(err.status);
+    if (err.status = 400) {
+      errorDescription.textContent =  'There\'s no such a city';
+      errorDialog.showModal();
+    }
+    else if (err.status = 404) {
+      errorDescription.textContent =  'Network connection is not stable';
+      errorDialog.showModal();
+    }
+  }
 }
 
 function getData (data) {
@@ -100,12 +118,12 @@ function getData (data) {
 function showCurrentWeather (data) {
   location.textContent = data.location.country + ', ' + data.location.name;
   localTime.textContent = data.location.localtime;
-  humidity.textContent = data.current.humidity;
+  humidity.textContent = data.current.humidity + '%';
   uvIndex.textContent = data.current.uv;
-  cloudiness.textContent = data.current.cloud;
-  rainChance.textContent = data.forecast.forecastday[0].day.daily_chance_of_snow;
+  cloudiness.textContent = data.current.cloud + '%';
+  rainChance.textContent = data.forecast.forecastday[0].day.daily_chance_of_rain + '%';
   tempStatus.textContent = data.current.condition.text;
-  cloudImg.src = data.current.condition.icon;
+  cloudImg.src = `${http}${data.current.condition.icon}`;
   sunrise.textContent = data.forecast.forecastday[0].astro.sunrise;
   sunset.textContent = data.forecast.forecastday[0].astro.sunset;
 
@@ -133,14 +151,14 @@ function showHourlyWeather (data) {
   oneEightStatus.textContent = data.forecast.forecastday[0].hour[18].condition.text;
   twoOneStatus.textContent = data.forecast.forecastday[0].hour[21].condition.text;
 
-  zeroZeroImg.src = data.forecast.forecastday[0].hour[0].condition.icon;
-  zeroThreeImg.src = data.forecast.forecastday[0].hour[3].condition.icon;
-  zeroSixImg.src = data.forecast.forecastday[0].hour[6].condition.icon;
-  zeroNineImg.src = data.forecast.forecastday[0].hour[9].condition.icon;
-  oneTwoImg.src = data.forecast.forecastday[0].hour[12].condition.icon;
-  oneFiveImg.src = data.forecast.forecastday[0].hour[15].condition.icon;
-  oneEightImg.src = data.forecast.forecastday[0].hour[18].condition.icon;
-  twoOneImg.src = data.forecast.forecastday[0].hour[21].condition.icon;
+  zeroZeroImg.src = http + data.forecast.forecastday[0].hour[0].condition.icon;
+  zeroThreeImg.src = http + data.forecast.forecastday[0].hour[3].condition.icon;
+  zeroSixImg.src = http + data.forecast.forecastday[0].hour[6].condition.icon;
+  zeroNineImg.src = http + data.forecast.forecastday[0].hour[9].condition.icon;
+  oneTwoImg.src = http + data.forecast.forecastday[0].hour[12].condition.icon;
+  oneFiveImg.src = http + data.forecast.forecastday[0].hour[15].condition.icon;
+  oneEightImg.src = http + data.forecast.forecastday[0].hour[18].condition.icon;
+  twoOneImg.src = http + data.forecast.forecastday[0].hour[21].condition.icon;
 
   if (toCelcuisBtn.classList.contains('active')){
     zeroZero.textContent = data.forecast.forecastday[0].hour[0].temp_c + celcuis;
@@ -165,13 +183,13 @@ function showHourlyWeather (data) {
 }
 
 function showWeeklyWeather(data) {
-  dayOneImg.src = data.forecast.forecastday[1].day.condition.icon;
-  dayTwoImg.src = data.forecast.forecastday[2].day.condition.icon;
-  dayThreeImg.src = data.forecast.forecastday[3].day.condition.icon;
-  dayFourImg.src = data.forecast.forecastday[4].day.condition.icon;
-  dayFiveImg.src = data.forecast.forecastday[5].day.condition.icon;
-  daySixImg.src = data.forecast.forecastday[6].day.condition.icon;
-  daySevenImg.src = data.forecast.forecastday[7].day.condition.icon;
+  dayOneImg.src = http + data.forecast.forecastday[1].day.condition.icon;
+  dayTwoImg.src = http + data.forecast.forecastday[2].day.condition.icon;
+  dayThreeImg.src = http + data.forecast.forecastday[3].day.condition.icon;
+  dayFourImg.src = http + data.forecast.forecastday[4].day.condition.icon;
+  dayFiveImg.src = http + data.forecast.forecastday[5].day.condition.icon;
+  daySixImg.src = http + data.forecast.forecastday[6].day.condition.icon;
+  daySevenImg.src = http + data.forecast.forecastday[7].day.condition.icon;
 
   dateOne.textContent = data.forecast.forecastday[1].date;
   dateTwo.textContent = data.forecast.forecastday[2].date;
@@ -206,12 +224,11 @@ function showWeeklyWeather(data) {
     tempDayFive.textContent = data.forecast.forecastday[5].day.maxtemp_f + `${degreeCircle} / ` + data.forecast.forecastday[5].day.mintemp_f + fahrenheit;
     tempDaySix.textContent = data.forecast.forecastday[6].day.maxtemp_f + `${degreeCircle} / ` + data.forecast.forecastday[6].day.mintemp_f + fahrenheit;
     tempDaySeven.textContent = data.forecast.forecastday[7].day.maxtemp_f + `${degreeCircle} / ` + data.forecast.forecastday[7].day.mintemp_f + fahrenheit;
-
   }
 };
 
 
-getAPI();
+getAPI()
 searchBtn.addEventListener('click', getAPI);
 toCelcuisBtn.addEventListener('click', ()=> {
   if (!toCelcuisBtn.classList.contains('active') && toFahrenheitBtn.classList.contains('active')) {
@@ -228,4 +245,8 @@ toFahrenheitBtn.addEventListener('click', () => {
   }
   getAPI();
 });
+
+errorDialogCloseBtn.addEventListener('click', () => {
+  errorDialog.close();
+})
 
